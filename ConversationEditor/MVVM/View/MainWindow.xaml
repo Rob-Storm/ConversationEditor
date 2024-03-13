@@ -5,30 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConversationEditor" xmlns:model="clr-namespace:ConversationEditor.MVVM.Model" d:DataContext="{d:DesignInstance Type=model:Dialogue}"
         mc:Ignorable="d"
-        Title="ConEdit" Height="450" Width="800">
+        Title="No Active File" Height="1080" Width="1920">
     <Grid Margin="0,0,0,20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="UserGrid" Grid.Row="1" Margin="4,178,12,13" ItemsSource="{Binding DialogueLines}">
+
+        <StackPanel Grid.Row="0">
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Open"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+        <ListView Name="UserGrid" Grid.Row="1" Margin="4,94,12,13" ItemsSource="{Binding DialogueLines}">
             <ListView.View>
                 <GridView x:Name="grdTest">
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding NodeID}" Width="30"/>
-                    <GridViewColumn Header="Speaker" DisplayMemberBinding="{Binding Speaker}" Width="150"/>
-                    <GridViewColumn Header="Dialogue Line" DisplayMemberBinding="{Binding DialogueLine}" Width="550"/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding NodeID}" Width="50"/>
+                    <GridViewColumn Header="Speaker" DisplayMemberBinding="{Binding Speaker}" Width="200"/>
+                    <GridViewColumn Header="Dialogue Line" DisplayMemberBinding="{Binding DialogueLine}" Width="1590"/>
                     <GridViewColumn Header="Next ID" DisplayMemberBinding="{Binding NextNodeID}" Width="50"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <!-- Textboxes and labels for user details -->
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="80,7,0,0" Name="txtUserId" VerticalAlignment="Top" Width="178" Text="{Binding ElementName=UserGrid, Path=SelectedItem.NodeID}"/>
-        <!-- Other TextBoxes and Labels for User details -->
-        <Button Content="Update" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="310,40,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="141" Command="{Binding Path=UpdateCommad}" />
-        <!-- Textboxes and labels for user's City, State, and Country -->
-        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="80,143,0,0" Name="txtCity" VerticalAlignment="Top" Width="178" Text="{Binding SelectedItem.DialogueLine, ElementName=UserGrid}"/>
-        <!-- Labels for Country, City, State -->
-        <!-- Textboxes and labels for Country, City, State -->
+        <!-- ID -->
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="11,10,0,0" Name="txtNodeId" VerticalAlignment="Top" Width="60" Text="{Binding ElementName=UserGrid, Path=SelectedItem.NodeID}"/>
+        <!-- Speaker -->
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="76,10,0,0" Name="txtSpeaker" VerticalAlignment="Top" Width="150" Text="{Binding ElementName=UserGrid, Path=SelectedItem.Speaker}"/>
+        <!-- DialogueLine -->
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="11,38,0,0" Name="txtDialogueLine" VerticalAlignment="Top" Width="778" Text="{Binding SelectedItem.DialogueLine, ElementName=UserGrid}"/>
+        <!-- NextID -->
+        <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="231,10,0,0" Name="txtNextID" VerticalAlignment="Top" Width="80" Text="{Binding SelectedItem.NextNodeID, ElementName=UserGrid}"/>
+        <!-- Update Line -->
+        <Button Content="Update" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="11,66,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="140" Command="{Binding Path=UpdateCommad}" />
+        <!-- Add New Line-->
+        <Button Content="Add New Line" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="156,66,0,0" x:Name="btnAdd" VerticalAlignment="Top" Width="140" Command="{Binding UpdateCommad}" />
     </Grid>
 </Window>

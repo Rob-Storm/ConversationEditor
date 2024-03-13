@@ -14,7 +14,7 @@ namespace ConversationEditor
         {
             base.OnStartup(e);
             MainWindow window = new MainWindow();
-            UserViewModel VM = new UserViewModel();
+            DialogueViewModel VM = new DialogueViewModel();
 
             window.DataContext = VM;
             window.Show();
