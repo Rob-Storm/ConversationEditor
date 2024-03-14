@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ConversationEditor" xmlns:model="clr-namespace:ConversationEditor.MVVM.Model" d:DataContext="{d:DesignInstance Type=model:Dialogue}"
+        xmlns:local="clr-namespace:ConversationEditor" xmlns:model="clr-namespace:ConversationEditor.MVVM.Model" xmlns:local1="clr-namespace:ConversationEditor.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=model:Dialogue}"
         mc:Ignorable="d"
         Title="No Active File" Height="1080" Width="1920">
+    <Window.DataContext>
+        <local1:DialogueViewModel/>
+    </Window.DataContext>
+    
     <Grid Margin="0,0,0,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -21,6 +25,7 @@
                     <MenuItem Header="_Save"/>
                     <MenuItem Header="_Open"/>
                 </MenuItem>
+                <MenuItem Header="_Export"/>
             </Menu>
         </StackPanel>
 
@@ -43,8 +48,8 @@
         <!-- NextID -->
         <TextBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="231,10,0,0" Name="txtNextID" VerticalAlignment="Top" Width="80" Text="{Binding SelectedItem.NextNodeID, ElementName=UserGrid}"/>
         <!-- Update Line -->
-        <Button Content="Update" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="11,66,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="140" Command="{Binding Path=UpdateCommad}" />
+        <Button Content="Update" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="11,66,0,0" Name="btnUpdate" VerticalAlignment="Top" Width="140" Command="{Binding UpdateCommand}" />
         <!-- Add New Line-->
-        <Button Content="Add New Line" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="156,66,0,0" x:Name="btnAdd" VerticalAlignment="Top" Width="140" Command="{Binding UpdateCommad}" />
+        <Button Content="Add New Line" Grid.Row="1" Height="22" HorizontalAlignment="Left" Margin="156,66,0,0" x:Name="btnAdd" VerticalAlignment="Top" Width="140" Command="{Binding UpdateCommand}" CommandParameter="AddNewLine"/>
     </Grid>
 </Window>
